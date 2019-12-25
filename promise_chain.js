@@ -7,7 +7,7 @@ const methodThatReturnsAPromise = id =>
 
     if (id == 'fuck') {
       console.log('promise fuck up')
-      reject('my fuck')
+      reject('error: ' + id)
     }
   })
 
