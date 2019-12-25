@@ -4,11 +4,6 @@ const methodThatReturnsAPromise = id =>
       console.log(id)
       resolve(id)
     }, 2000)
-
-    if (id == 'fuck') {
-      console.log('promise fuck up')
-      reject('error: ' + id)
-    }
   })
 
 
