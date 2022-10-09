@@ -32,7 +32,7 @@ Promise._all = (promiseList) => {
   })
 }
 
-Promise.race = (promiseList) => {
+Promise._race = (promiseList) => {
   return new Promise((resolve, reject) => {
     promiseList.forEach(p => {
       Promise.resolve(p).then(
