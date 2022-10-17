@@ -1,33 +1,25 @@
-function add (a, b, callback) {
-  callback(a + b)
+async function async1 () {
+  console.log("async1 start");
+  await async2();
+  console.log("async1 end");
 }
 
-const asyncAdd = (a, b) => new Promise(resolve => add(a, b, resolve))
-
-const chunk = (arr) => {
-  const res = []
-  for (let i = 0; i < arr.length; i += 2) {
-    res.push([arr[i], arr[i + 1] ?? 0])
-  }
-  console.log(res)
-  return res
+async function async2 () {
+  console.log("async2");
 }
 
+console.log("script start");
 
-async function sum (arr) {
-  return Promise.all(chunk(arr).map(([a, b]) => asyncAdd(a, b)))
-}
+setTimeout(function () {
+  console.log("setTimeout");
+}, 0);
 
+async1();
 
-async function asyncSum (...params) {
-  let arr = await sum(params)
-
-  while (arr.length > 1) {
-    arr = await sum(arr)
-  }
-
-  return arr[0]
-}
-
-const res = asyncSum(1, 2, 3, 4, 5);
-res.then(console.log)
+new Promise(function (resolve) {
+  console.log("promise1");
+  resolve();
+}).then(function () {
+  console.log("promise2");
+});
+console.log('script end')
