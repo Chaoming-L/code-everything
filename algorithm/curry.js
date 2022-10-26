@@ -2,11 +2,16 @@ const add = (a, b, c) => {
   return a + b + c;
 };
 
-function curry(fn, ...a1) {
-  if (a1.length >= fn.length) {
-    return fn.apply(this, a1)
+function curry (fn) {
+  return function curried (...args) {
+    if (args.length >= fn.length) {
+      return fn.apply(this, args)
+    } else {
+      return function (...args2) {
+        return curried.apply(this, args.concat(args2))
+      }
+    }
   }
-  return (...a2) => curry(fn, ...a2, ...a1)
 }
 
 let f1 = curry(add);
