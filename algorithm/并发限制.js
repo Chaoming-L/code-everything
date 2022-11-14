@@ -1,19 +1,44 @@
-const getNum = (input) => {
-  let arr = []
-  input.forEach((weight, i) => {
-    arr = arr.concat(new Array(weight).fill(i))
-  })
-  console.log(arr)
-  const len = arr.length - 1
+function asyncFunc (limit) {
+  const queue = []
+  let count = 0
 
-  return () => {
-    const n = Math.floor(Math.random() * len)
-    return arr[n]
+  const runTask = (fn) => {
+    if (fn) queue.push(fn)
+    if (count >= limit || queue.length === 0) return
+
+    count++
+    const task = queue.shift()
+    task().then(() => {
+      count--
+      runTask()
+    })
   }
+
+  const execute = (fn) => {
+    return new Promise((resolve, reject) => {
+      const task = () => fn().then(resolve, reject)
+      runTask(task)
+    }).catch(err => Promise.resolve(err))
+  }
+
+  return execute
 }
 
-const fn = getNum([1, 3, 3, 1])
-console.log(fn())
-console.log(fn())
-console.log(fn())
-console.log(fn())
+const execute = asyncFunc(2)
+
+const timeout = (value, fail) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('time' + value);
+      if (fail) reject('error')
+      resolve(value);
+    }, value * 1000);
+  });
+};
+
+execute(() => timeout(1))
+execute(() => timeout(3))
+execute(() => timeout(1))
+execute(() => timeout(2))
+execute(() => timeout(1))
+execute(() => timeout(1))

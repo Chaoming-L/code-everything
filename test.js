@@ -1,25 +1,19 @@
-async function async1 () {
-  console.log("async1 start");
-  await async2();
-  console.log("async1 end");
+function Person () {
+  this.age = 12
 }
 
-async function async2 () {
-  console.log("async2");
+Person.prototype.sex = 'man'
+
+const p = new Person()
+
+console.log(p)
+console.log(p.sex)
+
+const clone = (obj) => {
+  const targetProtoType = Object.getPrototypeOf(obj)
+  return Object.assign(Object.create(targetProtoType), obj)
 }
 
-console.log("script start");
-
-setTimeout(function () {
-  console.log("setTimeout");
-}, 0);
-
-async1();
-
-new Promise(function (resolve) {
-  console.log("promise1");
-  resolve();
-}).then(function () {
-  console.log("promise2");
-});
-console.log('script end')
+const p1 = clone(p)
+console.log(p1)
+console.log(p1.sex)
