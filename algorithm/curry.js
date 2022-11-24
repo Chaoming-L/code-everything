@@ -2,8 +2,8 @@ const add = (a, b, c) => {
   return a + b + c;
 };
 
-function curry (fn) {
-  return function curried (...args) {
+function curry (fn, ...rest) {
+  function curried (...args) {
     if (args.length >= fn.length) {
       return fn.apply(this, args)
     } else {
@@ -12,10 +12,14 @@ function curry (fn) {
       }
     }
   }
+
+  const _fn = curried(...rest)
+  return _fn
 }
 
-let f1 = curry(add);
-let f2 = f1(2);
-let f3 = f2(3);
+function makeArray5 (a, b, c, d, e) {
+  return [a, b, c, d, e];
+}
 
-console.log(f3(1));
+console.log(curry(makeArray5, 1, 2, 3, 4, 5))
+

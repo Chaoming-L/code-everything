@@ -1,19 +1,20 @@
-function Person () {
-  this.age = 12
+var a = 3
+var i = 10
+var total = 0
+var res = []
+
+function foo (a) {
+  var i = 0
+  for (; i < 3; i++) {
+    res[i] = function () {
+      console.log(i, a)
+      total = i * a
+      console.log(total)
+    }
+  }
 }
 
-Person.prototype.sex = 'man'
-
-const p = new Person()
-
-console.log(p)
-console.log(p.sex)
-
-const clone = (obj) => {
-  const targetProtoType = Object.getPrototypeOf(obj)
-  return Object.assign(Object.create(targetProtoType), obj)
-}
-
-const p1 = clone(p)
-console.log(p1)
-console.log(p1.sex)
+foo(1)
+res[0]()
+res[1]()
+res[2]()

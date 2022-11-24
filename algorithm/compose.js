@@ -7,9 +7,7 @@ const compose = (...func) => {
 }
 
 const add = (a, b) => a + b
-const pow = (a) => Math.pow(a, 2)
+const pow = (c) => Math.pow(c, 2)
 
-const n = compose(pow, add)(2, 4)
+const n = compose(pow, add)(1, 1)
 console.log(n)
-
-
