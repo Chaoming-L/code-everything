@@ -11,11 +11,13 @@ function dfs(data) {
 
   function helper(obj, preKey = '') {
     const isObjArray = Array.isArray(obj)
+
     Object.keys(obj).forEach((k) => {
       const key = isObjArray
         ? `${preKey}[${k}]`
-        : `${!preKey ? '' : preKey + '.'}${k}`
-      if (obj[k] instanceof Array) {
+        : `${preKey ? preKey + '.' : ''}${k}`
+  
+      if (obj[k] instanceof Object) {
         helper(obj[k], key)
       } else {
         res[key] = obj[k]
