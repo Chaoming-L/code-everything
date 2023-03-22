@@ -17,11 +17,14 @@
   },
   "homepage": "https://github.com/chaoming56/code-everything#readme",
   "devDependencies": {
+    "@types/node": "^18.15.5",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
     "eslint": "^8.24.0",
     "eslint-config-xo": "^0.42.0",
     "eslint-config-xo-typescript": "^0.53.0",
-    "typescript": "^4.8.4"
+    "ts-node": "^10.9.1",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5"
   }
 }
